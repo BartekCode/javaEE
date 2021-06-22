@@ -1,0 +1,33 @@
+.option{
+    font-family: sans-serif;
+    background-color: #24252a;
+    font-size: 12px;
+    border: 1px solid black;
+    max-width: 355px;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    max-height: 20px;
+    border-radius: 1rem;
+}
+.option1{
+    background-color: #24252a;
+}
+
+.buttan{
+    color: white;
+    background-color: #007aff;
+    border-radius: 1rem;
+    font-weight: bolder;
+}
+
+.buttan:hover{
+    opacity: 80%;
+}
+
+.select{
+    background-color: rgb(233, 233, 233);
+}

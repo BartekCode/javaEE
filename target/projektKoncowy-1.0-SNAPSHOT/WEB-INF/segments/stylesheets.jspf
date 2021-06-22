@@ -1,0 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Bartekk
+  Date: 26.01.2021
+  Time: 19:41
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/option.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/social.css">
+
+
+<%--segment będzie zawierał odnośniki do wspólnych arkuszy stylów, które znajdują się w sekcji <head>.--%>

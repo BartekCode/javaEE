@@ -1,0 +1,37 @@
+
+<!--Następnie w katalogu webapp/META-INF tworzymy plik context.xml, w którym konfigurujemy pulę połączeń.-->
+<Context>
+    <Resource name="jdbc/readstack"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              type="javax.sql.DataSource"
+              username="root"
+              password="password"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/readstack?serverTimezone=UTC"/>
+
+<!--  by moć sie logowac  -->
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           dataSourceName="jdbc/readstack"
+           localDataSource="true"
+           userTable="user"
+           userNameCol="username"
+           userCredCol="password"
+           userRoleTable="user_role"
+           roleNameCol="role_name">
+<!--    Jeżeli hasła są szyfrowane, to należy to wskazać poprzez konfigurację komponentu CredentialHandler w domenie bezpieczeństwa.     -->
+    <CredentialHandler
+            className="org.apache.catalina.realm.MessageDigestCredentialHandler"
+            algorithm="SHA-256" />
+
+
+<!--    gdybysmu chcieli by mozna bylo logowac sie przy uzyciu  hasla zapisanego otwartym tekstem i szyfrowanego   -->
+<!--        <CredentialHandler className="org.apache.catalina.realm.NestedCredentialHandler">-->
+<!--            <CredentialHandler-->
+<!--                    className="org.apache.catalina.realm.MessageDigestCredentialHandler"-->
+<!--                    algorithm="SHA-256" />-->
+<!--            <CredentialHandler-->
+<!--                    className="org.apache.catalina.realm.MessageDigestCredentialHandler"/>-->
+<!--        </CredentialHandler>-->
+<!--    </Realm>-->
+</Realm>
+</Context>

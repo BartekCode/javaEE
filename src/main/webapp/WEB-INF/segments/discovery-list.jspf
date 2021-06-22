@@ -1,0 +1,82 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Bartekk
+  Date: 26.01.2021
+  Time: 19:41
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="readstack.domain.discovery.DiscoveryDao" %>
+<%@ page import="readstack.domain.api.CommentService" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="readstack.domain.api.DiscoveryBasicInfo" %>
+<%@ page import="java.util.Comparator" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="../segments/stylesheets.jspf"%>
+
+<div class="option">
+<form method="get" action="sort">
+    <label class="option1" >Sortowanie</label>
+    <select name="sort">
+        <option value="data">Data:</option>
+        <option value="votesup">Liczba głosów: od najwiekszej</option>
+        <option value="votesdown">Liczba głosów: od najmniejszej</option>
+    </select>
+    <input class="buttan" type="submit" value="Select">
+</form>
+</div>
+
+<c:forEach var="discovery" items="${requestScope.discoveries}" >
+
+    <article class="discovery">
+        <h2 class="discovery-header"><c:out value="${discovery.title}"/></h2>
+        <img src="https://www.gry-online.pl/i/h/4/449414765.jpg" width="400" height="200" class="img">
+        <p class="discovery-details">Dodane przez: ${discovery.author}, ${discovery.dateAdded.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))}</p>
+        <a href="<c:out value='${discovery.url}'/>" target="_blank" class="discovery-link"><c:out value="${discovery.url}"/></a>
+
+        <p class="dis-description"><c:out value="${discovery.description}"/></p>
+        <c:choose>
+            <c:when test="${empty pageContext.request.userPrincipal}">
+            </c:when>
+            <c:when test="${not empty pageContext.request.userPrincipal}">
+                <form method="post" action="${pageContext.request.contextPath.concat('/discovery/comment?id=').concat(discovery.id)}" >
+                <textarea name="description" placeholder="Komentarz"></textarea>
+                <button>Dodaj komentarz</button>
+                </form>
+                <form method="post" action="${pageContext.request.contextPath.concat('/discovery/addtofavorites?id=').concat(discovery.id)}">
+                    <button id="fav">Dodaj do ulubionych</button>
+                </form>
+            </c:when>
+        </c:choose>
+
+
+<%--    ogarnąć te komentarze by łądnie wygladały   --%>
+        <h3 class="discovery-header">Komentarze</h3>
+
+    <c:forEach items="${discovery.comments}" var="comment">
+        <div class="mincomment">
+        <p id="comentAutor">Autor: ${comment.author}</p>
+            <p id="commentdesc"> ${comment.description}</p>
+        <p id="commentDate">Data dodania: ${comment.dateAdded.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))}</p>
+        </div>
+    </c:forEach>
+        <section class="discovery-bar">
+            <a href="${pageContext.request.contextPath.concat('/discovery/vote?id=').concat(discovery.id).concat('&type=UP')}" class="discovery-link upvote">
+                <i class="fas fa-arrow-alt-circle-up discovery-upvote"></i>
+            </a>
+            <p class="discovery-votes">${discovery.voteCount}</p>
+            <a href="${pageContext.request.contextPath.concat('/discovery/vote?id=').concat(discovery.id).concat('&type=DOWN')}" class="discovery-link downvote">
+                <i class="fas fa-arrow-alt-circle-down discovery-downvote"></i>
+            </a>
+        </section>
+    </article>
+</c:forEach>
+<a class="sidebar">2021-03-01 08:05:38,147] Artifact projektKoncowy:war exploded: Artifact is deployed successfully
+    [2021-03-01 08:05:38,147] Artifact projektKoncowy:war exploded: Deploy took 1,727 milliseconds
+    01-Mar-2021 20:05:46.146 INFO [Catalina-utility-2] org.apache.catalina.startup.HostConfi</a>
+<a href="${pageContext.request.contextPath}/discovery/add" class="discovery-add-button">
+    <i class="fa fa-plus"></i>
+</a>
+<%--LISTA ZNALEZISK --%>
